@@ -8,7 +8,7 @@ function Dashboard() {
       <div className='App'>
         <header className='app-header'>
           <img src={logo} className='app-logo' alt='logo' />
-          <h1 className='text-blue-300 font-extrabold'>Dashboard</h1>
+          <h1>Dashboard</h1>
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
