@@ -6,16 +6,18 @@ function Dashboard() {
   return (
     <div className='flex h-screen overflow-hidden'>
       <div className='App'>
-        <header className='App-header'>
-          <img src={logo} className='App-logo' alt='logo' />
-          <h1>Dashboard</h1>
+        <header className='app-header'>
+          <img src={logo} className='app-logo' alt='logo' />
+          <h1 className='text-blue-300 font-extrabold'>Dashboard</h1>
           <p>
             Edit <code>src/App.tsx</code> and save to reload.
           </p>
-          <a className='App-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
+          <a className='app-link' href='https://reactjs.org' target='_blank' rel='noopener noreferrer'>
             Learn React
           </a>
         </header>
+        <h1 className='text-blue-700 font-extrabold'>Hello World!</h1>
+        <p className='tracking-widest'>This is my first React App.</p>
       </div>
     </div>
   );
