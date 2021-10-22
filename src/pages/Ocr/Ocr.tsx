@@ -7,6 +7,7 @@ import FilePondPluginImagePreview from 'filepond-plugin-image-preview';
 import 'filepond-plugin-image-preview/dist/filepond-plugin-image-preview.min.css';
 import 'filepond/dist/filepond.min.css';
 import './style.scss';
+import OcrResult from 'components/OcrResult';
 
 registerPlugin(FilePondPluginImagePreview);
 
@@ -67,20 +68,21 @@ function Ocr() {
           <p className='text-lg text-blue-700'>Paste image to upload</p>
         </div> */}
 
-        <div className='flex items-center justify-center bg-grey-lighter'>
-          <div className='w-64 flex flex-col items-center justify-center px-4 py-6 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white'>
-            <i>
-              <svg
-                className='fill-current w-12 h-12 mb-3 text-blue-700'
-                xmlns='http://www.w3.org/2000/svg'
-                width='34'
-                height='34'
-                viewBox='0 0 24 24'
-              >
-                <path d='M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z' />
-              </svg>
-            </i>
-            <span className='mt-2 text-lg text-blue-700 text-base leading-normal '>Paste a file</span>
+        <div className='flex flex-col items-center justify-center items-center justify-center bg-grey-lighter'>
+          <i>
+            <svg
+              className='fill-current w-12 h-12 mb-3 text-blue-700'
+              xmlns='http://www.w3.org/2000/svg'
+              width='34'
+              height='34'
+              viewBox='0 0 24 24'
+            >
+              <path d='M19.479 10.092c-.212-3.951-3.473-7.092-7.479-7.092-4.005 0-7.267 3.141-7.479 7.092-2.57.463-4.521 2.706-4.521 5.408 0 3.037 2.463 5.5 5.5 5.5h13c3.037 0 5.5-2.463 5.5-5.5 0-2.702-1.951-4.945-4.521-5.408zm-7.479-1.092l4 4h-3v4h-2v-4h-3l4-4z' />
+            </svg>
+          </i>
+          <span className='text-lg text-gray-500'>Drag and drop your image</span>&nbsp;
+          <div className='w-64 flex flex-col items-center justify-center px-3 py-2 bg-white text-blue rounded-lg shadow-lg tracking-wide uppercase border border-blue cursor-pointer hover:bg-blue hover:text-white'>
+            <span className='mt-2 text-lg text-blue-700 text-base leading-normal '>Select a file</span>
             <input type='file' className='hidden' />
           </div>
         </div>
@@ -101,7 +103,7 @@ function Ocr() {
               <FilePond labelIdle={ReactDOMServer.renderToString(filePondLabel())} />
             </div>
             <div className=''>
-              <h1>result</h1>
+              <OcrResult />
             </div>
           </article>
         </main>
