@@ -1,0 +1,36 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  .desc {
+    display: flex;
+    color: #5f5f6b;
+    font-weight: 900;
+  }
+  img {
+    max-width: 100px;
+    transition: transform 0.3s; /* Animation */
+  }
+  p {
+    transition: transform 0.3s; /* Animation */
+  }
+  .desc-file {
+    color: #5959e1;
+    margin-left: 0.2rem;
+    cursor: pointer;
+    font-weight: 900;
+  }
+  .desc-support {
+    margin-top: 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+.is-drag-active {
+  img,
+  p {
+    transform: scale(1.2);
+  }
+}
