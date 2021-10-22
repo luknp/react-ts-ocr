@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createWorker, Worker } from 'tesseract.js';
-import DragAndDropField from 'components/DragAndDropField';
+import Dropzone from 'components/Dropzone';
 
 import './style.scss';
 
@@ -71,7 +71,7 @@ function Ocr() {
     <div className='ocr' onPaste={onPaste}>
       <h3 className='title'>Upload your images to OCR processing</h3>
       <div className='content'>
-        <DragAndDropField />
+        <Dropzone addNewFile={file => setFile(file)} />
         {file ? <p> file added</p> : <p>No file yet</p>}
         <p>{progressProcent}</p>
         <p>{resultText}</p>
