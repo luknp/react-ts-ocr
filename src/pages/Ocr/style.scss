@@ -1,8 +1,5 @@
-.filepond--credits {
-  display: none !important;
-}
-
-.background,
-.filepond--drop-label {
-  background-color: white;
+.ocr {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
