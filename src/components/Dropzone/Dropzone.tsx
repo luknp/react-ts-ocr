@@ -1,17 +1,19 @@
 import React, { useMemo, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import folderIcon from 'assets/blue-folder-icon2.png'; // with import
+import { ImageFile, convertToImageFile } from 'utils';
 import './style.scss';
 
 type Props = {
-  addNewFile: (file: File) => void;
+  addNewFiles: (files: ImageFile[]) => void;
 };
 
-export default function Dropzone({ addNewFile }: Props) {
+export default function Dropzone({ addNewFiles }: Props) {
   const { acceptedFiles, getRootProps, getInputProps, isDragActive, isDragAccept, isDragReject } = useDropzone();
 
   useEffect(() => {
-    addNewFile(acceptedFiles[0]);
+    addNewFiles(convertToImageFile(acceptedFiles));
+
     console.log(acceptedFiles);
   }, [acceptedFiles]);
 
