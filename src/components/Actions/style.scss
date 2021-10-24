@@ -1,0 +1,39 @@
+.actions {
+  width: 100%;
+  margin-top: 1rem;
+  .action {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(216, 216, 216);
+    background: linear-gradient(to right, #f3f3f3 var(--progressProcent), white 0);
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    position: relative;
+    .buttons {
+      margin-left: auto;
+      display: flex;
+      svg {
+        background-color: rgb(235, 235, 235);
+        border-radius: 50%;
+        margin: 0.2rem;
+        padding: 0.2rem;
+        cursor: pointer;
+      }
+      .danger {
+        background-color: rgb(255, 226, 226);
+      }
+    }
+    &__content {
+      .status {
+        display: flex;
+        flex-direction: column;
+        .status3 {
+          font-size: 0.8rem;
+          color: #bdbdbd;
+        }
+      }
+    }
+  }
+}

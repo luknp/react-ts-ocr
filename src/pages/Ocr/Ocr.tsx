@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createWorker, Worker } from 'tesseract.js';
 import Dropzone from 'components/Dropzone';
+import Actions from 'components/Actions';
 
 import './style.scss';
 
@@ -72,6 +73,7 @@ function Ocr() {
       <h3 className='title'>Upload your images to OCR processing</h3>
       <div className='content'>
         <Dropzone addNewFile={file => setFile(file)} />
+        <Actions />
         {file ? <p> file added</p> : <p>No file yet</p>}
         <p>{progressProcent}</p>
         <p>{resultText}</p>
