@@ -87,7 +87,7 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
       </div>
 
       <div className='result-text'>
-        <input className='result-input' type='text' placeholder='VIN' value={resultInput} onChange={handleOnChange} />
+        <input className='result-input' type='text' placeholder='result' value={resultInput} onChange={handleOnChange} />
         <svg
           className={`h-5 w-5 mr-2 ${isCopied ? 'text-green-400' : 'text-gray-400'} `}
           viewBox='0 0 24 24'
@@ -106,6 +106,28 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
 
   return (
     <div className='actions'>
+      <div className='image-preview'>
+        <img src={files[0]?.preview} />
+        <div className='over-img'>
+          <svg
+            className='h-6 w-6 text-indigo-100 black-background'
+            width='24'
+            height='24'
+            viewBox='0 0 24 24'
+            strokeWidth='2'
+            stroke='currentColor'
+            fill='none'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <path stroke='none' d='M0 0h24v24H0z' /> <line x1='18' y1='6' x2='6' y2='18' /> <line x1='6' y1='6' x2='18' y2='18' />
+          </svg>
+          <div className='info'>
+            <span className='file-name'>image.png </span>
+            <span className='file-size'>57 KB</span>
+          </div>
+        </div>
+      </div>
       <div className='action' style={style}>
         <svg
           className='h-6 w-6 text-green-400 mr-1'
