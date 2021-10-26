@@ -8,3 +8,10 @@ export const convertToImageFile = (files: File[]): ImageFile[] => {
   );
   return imageFiles;
 };
+
+export enum State {
+  Pending = 0,
+  Uploading,
+  Ocr,
+  Result,
+}

@@ -26,6 +26,7 @@
       }
     }
     &__content {
+      width: 100%;
       .status {
         display: flex;
         flex-direction: column;
@@ -33,6 +34,39 @@
           font-size: 0.8rem;
           color: #bdbdbd;
         }
+      }
+    }
+    .result {
+      display: flex;
+      align-items: center;
+      .result-text {
+        width: 100%;
+        margin: 0 1rem;
+        border: 1px solid rgb(216, 216, 216);
+        border-radius: 0.5rem;
+        display: flex;
+        align-items: center;
+        background-color: white;
+        svg {
+          cursor: pointer;
+        }
+        svg:hover {
+          scale: 1.2;
+        }
+      }
+      .result-input {
+        width: 100%;
+        margin-left: 0.5rem;
+      }
+      input:focus {
+        outline: none;
+      }
+      .preview {
+        border: 1px solid rgb(216, 216, 216);
+        width: 100%;
+      }
+      input {
+        padding: 0.5rem;
       }
     }
   }

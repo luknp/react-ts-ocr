@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { createWorker, Worker } from 'tesseract.js';
 import Dropzone from 'components/Dropzone';
 import Actions from 'components/Actions';
-import { ImageFile, convertToImageFile } from 'utils';
+import { ImageFile, convertToImageFile, State } from 'utils';
 import './style.scss';
 
 function Ocr() {
@@ -10,9 +10,11 @@ function Ocr() {
   const [worker, setWorker] = useState<Worker | null>(null);
   const [progressProcent, setProgressProcent] = useState(0);
   const [resultText, setResultText] = useState('');
+  const [currentState, setCurrentState] = useState(State.Pending);
 
   useEffect(() => {
-    if (files) {
+    if (files.length) {
+      setCurrentState(State.Ocr);
       ocrLogic(files[0]);
     }
   }, [files]);
@@ -36,11 +38,11 @@ function Ocr() {
       data: { text },
     } = await worker.recognize(imageFile);
     setResultText(text);
+    setCurrentState(State.Result);
   };
 
   const updateProgressAndLog = (m: any) => {
     const MAX_PARCENTAGE = 1;
-
     if (m.status === 'recognizing text') {
       const pctg = (m.progress / MAX_PARCENTAGE) * 100;
       setProgressProcent(pctg);
@@ -64,10 +66,9 @@ function Ocr() {
       <h3 className='title'>Upload your images to OCR processing</h3>
       <div className='content'>
         <Dropzone addNewFiles={data => setFiles(data)} />
-        <Actions files={files} lastFileProgressProcent={progressProcent} />
-        {files ? <p> file added</p> : <p>No file yet</p>}
-        <p>{progressProcent}</p>
-        <p>{resultText}</p>
+        {files.length > 0 && (
+          <Actions files={files} lastFileProgressProcent={progressProcent} appState={currentState} resultText={resultText} />
+        )}
       </div>
     </div>
   );
