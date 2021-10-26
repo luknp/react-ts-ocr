@@ -7,8 +7,8 @@
     img {
       border-radius: 0.5rem;
       border: 1px solid rgb(216, 216, 216);
+      min-height: 50px;
       max-height: 150px;
-      opacity: 0.8;
     }
     .over-img {
       position: absolute;
@@ -20,6 +20,7 @@
         border-radius: 50%;
         margin: 0.2rem;
         padding: 0.2rem;
+        opacity: 0.6;
         cursor: pointer;
         &:hover {
           border: 2px solid white;
@@ -85,12 +86,6 @@
         display: flex;
         align-items: center;
         background-color: white;
-        svg {
-          cursor: pointer;
-        }
-        svg:hover {
-          scale: 1.2;
-        }
       }
       .result-input {
         width: 100%;
@@ -105,6 +100,36 @@
       }
       input {
         padding: 0.5rem;
+      }
+      .icon-tooltip {
+        position: relative;
+        svg {
+          cursor: pointer;
+        }
+        .tooltip {
+          visibility: visible;
+          width: 120px;
+          background-color: #5959e1;
+          color: rgb(255, 255, 255);
+          text-align: center;
+          border-radius: 6px;
+          padding: 5px 0;
+          position: absolute;
+          z-index: 1;
+          bottom: 150%;
+          left: 50%;
+          margin-left: -60px;
+          &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #5959e1 transparent transparent transparent;
+          }
+        }
       }
     }
   }
