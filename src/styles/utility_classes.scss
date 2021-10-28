@@ -1,0 +1,28 @@
+:root {
+  --search-width: 350px;
+  --max-page-width: 1000px;
+}
+
+.page-content {
+  max-width: var(--max-page-width);
+  width: 100%;
+  margin: auto;
+}
+
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.text-truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

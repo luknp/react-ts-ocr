@@ -1,18 +1,23 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { createWorker, Worker } from 'tesseract.js';
+import Dropzone from 'components/Dropzone';
+import Actions from 'components/Actions';
+import { ImageFile, convertToImageFile, State } from 'utils';
 import './style.scss';
 
 function Ocr() {
-  const [file, setFile] = useState<File | null>(null);
+  const [files, setFiles] = useState<ImageFile[]>([]);
   const [worker, setWorker] = useState<Worker | null>(null);
-  const [progressProcent, setProgressProcent] = useState('0.00');
+  const [progressProcent, setProgressProcent] = useState(0);
   const [resultText, setResultText] = useState('');
+  const [currentState, setCurrentState] = useState(State.Pending);
 
   useEffect(() => {
-    if (file) {
-      ocrLogic(file);
+    if (files.length) {
+      setCurrentState(State.Ocr);
+      ocrLogic(files[0]);
     }
-  }, [file]);
+  }, [files]);
 
   useEffect(() => {
     const workerInit = createWorker({
@@ -21,8 +26,8 @@ function Ocr() {
     setWorker(workerInit);
   }, []);
 
-  const ocrLogic = async (file: File) => {
-    setProgressProcent('0.00');
+  const ocrLogic = async (imageFile: ImageFile) => {
+    setProgressProcent(0);
     if (!worker) {
       return;
     }
@@ -31,35 +36,33 @@ function Ocr() {
     await worker.initialize('eng');
     const {
       data: { text },
-    } = await worker.recognize(file);
+    } = await worker.recognize(imageFile);
     setResultText(text);
+    setCurrentState(State.Result);
   };
 
   const updateProgressAndLog = (m: any) => {
     const MAX_PARCENTAGE = 1;
-    const DECIMAL_COUNT = 2;
-
     if (m.status === 'recognizing text') {
       const pctg = (m.progress / MAX_PARCENTAGE) * 100;
-      setProgressProcent(pctg.toFixed(DECIMAL_COUNT));
+      setProgressProcent(pctg);
     }
+  };
+
+  const handleDeleteFiles = () => {
+    setFiles([]);
+    setProgressProcent(0);
+    setResultText('');
+    setCurrentState(State.Pending);
   };
 
   const onPaste = (e: React.ClipboardEvent<HTMLElement | undefined>) => {
     if (e.clipboardData.files.length) {
       const fileObject = e.clipboardData.files[0];
-      const file = {
-        getRawFile: () => fileObject,
-        name: fileObject.name,
-        size: fileObject.size,
-        uid: 1,
-        status: 2,
-        progress: 0,
-      };
-      setFile(fileObject);
-      //   const filesState = this.state.files.map((f) => ({ ...f }));
-      //   filesState.push(file);
-      //   setState({ files: filesState });
+      const filesCopy = [...files];
+      const imageFile = convertToImageFile([fileObject])[0];
+      filesCopy.unshift(imageFile);
+      setFiles(filesCopy);
     } else {
       alert('No image data was found in your clipboard. Copy an image first or take a screenshot.');
     }
@@ -67,10 +70,30 @@ function Ocr() {
 
   return (
     <div className='ocr' onPaste={onPaste}>
-      <h2>add file</h2>
-      {file ? <p> file added</p> : <p>No file yet</p>}
-      <p>{progressProcent}</p>
-      <p>{resultText}</p>
+      <h3 className='title'>Upload your images to OCR VIN processing</h3>
+      <div className='content'>
+        <Dropzone addNewFiles={data => setFiles(data)} />
+        {files.length > 0 ? (
+          <Actions
+            files={files}
+            lastFileProgressProcent={progressProcent}
+            appState={currentState}
+            resultText={resultText}
+            handleDeleteFiles={handleDeleteFiles}
+          />
+        ) : (
+          <ul id='gallery' className='flex flex-1 flex-wrap mt-16'>
+            <li id='empty' className='h-full w-full text-center flex flex-col items-center justify-center items-center'>
+              <img
+                className='mx-auto w-32'
+                src='https://user-images.githubusercontent.com/507615/54591670-ac0a0180-4a65-11e9-846c-e55ffce0fe7b.png'
+                alt='no data'
+              />
+              <span className='text-small text-gray-500'>No imege selected</span>
+            </li>
+          </ul>
+        )}
+      </div>
     </div>
   );
 }
