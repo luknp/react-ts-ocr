@@ -33,7 +33,7 @@ function Ocr() {
     }
     await worker.load();
     await worker.loadLanguage('eng');
-    await worker.initialize('eng');
+    await worker.initialize();
     const {
       data: { text },
     } = await worker.recognize(imageFile);
