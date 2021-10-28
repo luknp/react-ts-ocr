@@ -7,11 +7,12 @@ type Props = {
   lastFileProgressProcent: number;
   appState: State;
   resultText: string;
+  handleDeleteFiles: () => void;
 };
 
 const VIN_REGEX = new RegExp('[a-zA-Z0-9]{9}[a-zA-Z0-9-]{2}[0-9]{6}');
 
-export default function Actions({ files, lastFileProgressProcent, appState, resultText }: Props) {
+export default function Actions({ files, lastFileProgressProcent, appState, resultText, handleDeleteFiles }: Props) {
   const [resultInput, setResultInput] = useState('');
   const [isCopied, setIsCopied] = useState(false);
   useEffect(() => {
@@ -125,6 +126,7 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
             fill='none'
             strokeLinecap='round'
             strokeLinejoin='round'
+            onClick={handleDeleteFiles}
           >
             <path stroke='none' d='M0 0h24v24H0z' /> <line x1='18' y1='6' x2='6' y2='18' /> <line x1='6' y1='6' x2='18' y2='18' />
           </svg>
@@ -187,6 +189,7 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
             fill='none'
             strokeLinecap='round'
             strokeLinejoin='round'
+            onClick={handleDeleteFiles}
           >
             <path stroke='none' d='M0 0h24v24H0z' /> <line x1='18' y1='6' x2='6' y2='18' /> <line x1='6' y1='6' x2='18' y2='18' />
           </svg>

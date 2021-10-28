@@ -49,6 +49,13 @@ function Ocr() {
     }
   };
 
+  const handleDeleteFiles = () => {
+    setFiles([]);
+    setProgressProcent(0);
+    setResultText('');
+    setCurrentState(State.Pending);
+  };
+
   const onPaste = (e: React.ClipboardEvent<HTMLElement | undefined>) => {
     if (e.clipboardData.files.length) {
       const fileObject = e.clipboardData.files[0];
@@ -67,7 +74,13 @@ function Ocr() {
       <div className='content'>
         <Dropzone addNewFiles={data => setFiles(data)} />
         {files.length > 0 ? (
-          <Actions files={files} lastFileProgressProcent={progressProcent} appState={currentState} resultText={resultText} />
+          <Actions
+            files={files}
+            lastFileProgressProcent={progressProcent}
+            appState={currentState}
+            resultText={resultText}
+            handleDeleteFiles={handleDeleteFiles}
+          />
         ) : (
           <ul id='gallery' className='flex flex-1 flex-wrap mt-16'>
             <li id='empty' className='h-full w-full text-center flex flex-col items-center justify-center items-center'>
