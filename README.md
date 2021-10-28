@@ -22,4 +22,4 @@ npm start
 
 ## App example working presentation
 
-![App gif presentation](https://github.com/luknp/react-ts-ocr/refactor/app-presentation.gif)
+![App gif presentation](app-presentation.gif)
