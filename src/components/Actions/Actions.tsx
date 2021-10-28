@@ -139,7 +139,19 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
         </div>
       </div>
       <div className='action' style={style}>
-        {isCorrect ? (
+        {appState === State.Ocr || appState === State.Uploading ? (
+          <svg
+            className='h-7 w-7 text-blue-600 mr-2'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <circle cx='12' cy='12' r='10' /> <polyline points='12 6 12 12 16 14' />
+          </svg>
+        ) : isCorrect ? (
           <svg
             className='h-6 w-6 text-green-400 mr-1'
             viewBox='0 0 24 24'
