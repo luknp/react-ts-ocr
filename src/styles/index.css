@@ -15,3 +15,13 @@ body {
 code {
   /* font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace; */
 }
+
+:root {
+  --color-primary: #317eeb;
+  --color-primary-light: #317eeb;
+  --color-primary-dark: #317eeb;
+  --color-primary-contrastText: #317eeb;
+  --color-secondary: #317eeb;
+  --color-background: #317eeb;
+  --color-background-papper: #317eeb;
+}

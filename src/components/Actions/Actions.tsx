@@ -9,6 +9,8 @@ type Props = {
   resultText: string;
 };
 
+const VIN_REGEX = new RegExp('[a-zA-Z0-9]{9}[a-zA-Z0-9-]{2}[0-9]{6}');
+
 export default function Actions({ files, lastFileProgressProcent, appState, resultText }: Props) {
   const [resultInput, setResultInput] = useState('');
   const [isCopied, setIsCopied] = useState(false);
@@ -74,7 +76,8 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
     await navigator.clipboard.writeText(resultInput);
     setTimeout(() => setIsCopied(false), 2000);
   };
-  // alert(resultText);
+
+  const isCorrect = VIN_REGEX.test(resultInput);
 
   const contentResult = (
     <div className='result'>
@@ -83,7 +86,7 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
       </div> */}
 
       <div className='status'>
-        <span className='status3'>100% done</span>
+        <span className='status3'>{isCorrect ? '100% done' : 'Check correctness!'}</span>
       </div>
 
       <div className='result-text'>
@@ -132,17 +135,33 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
         </div>
       </div>
       <div className='action' style={style}>
-        <svg
-          className='h-6 w-6 text-green-400 mr-1'
-          viewBox='0 0 24 24'
-          fill='none'
-          stroke='currentColor'
-          strokeWidth='2'
-          strokeLinecap='round'
-          strokeLinejoin='round'
-        >
-          <path d='M22 11.08V12a10 10 0 1 1-5.93-9.14' /> <polyline points='22 4 12 14.01 9 11.01' />
-        </svg>
+        {isCorrect ? (
+          <svg
+            className='h-6 w-6 text-green-400 mr-1'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <path d='M22 11.08V12a10 10 0 1 1-5.93-9.14' /> <polyline points='22 4 12 14.01 9 11.01' />
+          </svg>
+        ) : (
+          <svg
+            className='h-7 w-7 text-yellow-400 mr-2'
+            viewBox='0 0 24 24'
+            fill='none'
+            stroke='currentColor'
+            strokeWidth='2'
+            strokeLinecap='round'
+            strokeLinejoin='round'
+          >
+            <path d='M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z' />{' '}
+            <line x1='12' y1='9' x2='12' y2='13' /> <line x1='12' y1='17' x2='12.01' y2='17' />
+          </svg>
+        )}
+
         <div className='action__content'>{appState == State.Result ? contentResult : contentInit}</div>
         <div className='buttons'>
           {appState !== State.Result && (
