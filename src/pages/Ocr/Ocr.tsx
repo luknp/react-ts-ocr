@@ -70,7 +70,7 @@ function Ocr() {
 
   return (
     <div className='ocr' onPaste={onPaste}>
-      <h3 className='title'>Upload your images to OCR processing</h3>
+      <h3 className='title'>Upload your images to OCR VIN processing</h3>
       <div className='content'>
         <Dropzone addNewFiles={data => setFiles(data)} />
         {files.length > 0 ? (

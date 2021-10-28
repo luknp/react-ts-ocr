@@ -62,7 +62,7 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
   const contentInit = (
     <div className='status'>
       <span className='status2'>{getStatusText()}</span>
-      <span className='status3'>{`${progressProcentSafeguard(lastFileProgressProcent)}% - ${getSecondToEnd(
+      <span className='status3'>{`${progressProcentSafeguard(Math.round(lastFileProgressProcent))}% - ${getSecondToEnd(
         lastFileProgressProcent,
       )} seconds left`}</span>
     </div>
@@ -75,17 +75,19 @@ export default function Actions({ files, lastFileProgressProcent, appState, resu
   const handleCopyToClipboard = async () => {
     setIsCopied(true);
     await navigator.clipboard.writeText(resultInput);
-    setTimeout(() => setIsCopied(false), 2000);
+    setTimeout(() => setIsCopied(false), 1000);
   };
 
   const isCorrect = VIN_REGEX.test(resultInput);
+  if (isCorrect && resultInput.length > 17) {
+    const arr = VIN_REGEX.exec(resultInput);
+    if (arr) {
+      setResultInput(arr['0']);
+    }
+  }
 
   const contentResult = (
     <div className='result'>
-      {/* <div className='preview'>
-        <img src={files[0]?.preview} />
-      </div> */}
-
       <div className='status'>
         <span className='status3'>{isCorrect ? '100% done' : 'Check correctness!'}</span>
       </div>
