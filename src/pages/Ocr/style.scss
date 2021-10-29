@@ -2,12 +2,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  .title {
+  &__title {
     color: #616164;
     font-size: 1.5rem;
     padding: 2rem;
   }
-  .content {
+  &__content {
     display: flex;
     flex-direction: column;
     align-items: center;
